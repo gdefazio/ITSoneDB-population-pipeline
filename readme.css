@@ -1,0 +1,13 @@
+#justify {
+    width: 100%;
+    background: #D33;
+}
+
+#justify p {
+    margin: 0 auto;
+    max-width: 70%;
+    list-style: disc outside none;
+    text-align: justify;
+    display: list-item;
+    background: #ccc;
+    }
