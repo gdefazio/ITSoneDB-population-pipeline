@@ -17,7 +17,7 @@ ___
 ___
 
 ## REQUIREMENTS
-1. The **Biopython** module is required (for installation info [http://biopython.org](http://biopython.org)).
+1. The **Biopython** module is required (for installation info see [http://biopython.org](http://biopython.org)).
 2. The Species Representative Entry Identification procedure require **VSEARCH** (for installation info see [https://github.com/torognes/vsearch](https://github.com/torognes/vsearch)).
 
 ## USAGE
@@ -34,13 +34,13 @@ Following the instruction to execute the scripts:
         - mv *tsv tsv_folder
 + **Extraction of ITS1 annotated in ENA entries**:
         - python extract_ITS1_loc.py tsv_folder
-+ **HMM based ITS1 boundaries inference**:
++ **HMM based ITS1 boundaries inference**:  
     1. mkdir script
-    2. mv estrazione_localizzazione_from_hmm.py script
+    2. mv estrazione_localizzazione_from_hmm.py script 
     3. mv hmmer_txt_parser.py script
     4. cd script && pwd && cd ..
     5. substitute the result of the previous step in the line 5 of the BASH script ITSoneDB_update_bf.sh
     6. cd fasta_file_folder 
     7. ls *fasta.gz > sample_list
-    8. ./ITSoneDB_update_bf.sh
-
+    8. ./ITSoneDB_update_bf.sh  
+ 
