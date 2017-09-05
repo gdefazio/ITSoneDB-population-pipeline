@@ -32,8 +32,8 @@ Following the instruction to execute the scripts:
     3. Prepare TSV folder:
         - mkdir tsv_folder
         - mv *tsv tsv_folder
-+ **Extraction of ITS1 annotated in ENA entries**:
-        - python extract_ITS1_loc.py tsv_folder
++ **Extraction of ITS1 annotated in ENA entries**:  
+        python extract_ITS1_loc.py tsv_folder
 + **HMM based ITS1 boundaries inference**:  
     1. mkdir script
     2. mv estrazione_localizzazione_from_hmm.py script 
