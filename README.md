@@ -1,9 +1,10 @@
 # ITSoneDB population pipeline
 
 ___
-**ITSoneDB** is a database colleciting Eukayotic ITS1 sequencens and consistent taxonomic annotation. It is avaialble at [http://itsonedb.cloud.ba.infn.it/](http://itsonedb.cloud.ba.infn.it/). 
-___  
-<div align=justify>The designed pipeline integrates ad-hoc Python and BASH scripts and third-party tools (See the figure below).
+**ITSoneDB** is a database collecting Eukayotic ITS1 sequences and consistent taxonomic annotations. It is available at [http://itsonedb.cloud.ba.infn.it/](http://itsonedb.cloud.ba.infn.it/). 
+___
+## RATIONALE  
+<div align=justify>The pipeline designed for ITSoneDB population integrates <em>ad-hoc</em> Python and BASH scripts and third-party tools (See the figure below).
 
 1. In the initial step the ENA entries are locally downloaded and eukaryotic entries are extracted.  
 
@@ -14,3 +15,32 @@ ___
 ___
 ![Alt text](ITSoneDB_Eukaryotes.tif "Pipeline steps developed to generate ITSoneDB")
 ___
+
+## REQUIREMENTS
+1. The **Biopython** module is required (for installation info [http://biopython.org](http://biopython.org)).
+2. The Species Representative Entry Identification procedure require **VSEARCH** (for installation info see [https://github.com/torognes/vsearch](https://github.com/torognes/vsearch)).
+
+## USAGE
+Following the instruction to execute the scripts:
++ **ENA flat file parsing**:
+    1. flat file parsing:
+        - python ENA_parser.py
+    2. prepare FASTA folder
+        - gzip *fasta
+        - mkdir fasta_file_folder
+        - mv *fasta.gz fasta_file_folder
+    3. Prepare TSV folder:
+        - mkdir tsv_folder
+        - mv *tsv tsv_folder
++ **Extraction of ITS1 annotated in ENA entries**:
+        - python extract_ITS1_loc.py tsv_folder
++ **HMM based ITS1 boundaries inference**:
+    1. mkdir script
+    2. mv estrazione_localizzazione_from_hmm.py script
+    3. mv hmmer_txt_parser.py script
+    4. cd script && pwd && cd ..
+    5. substitute the result of the previous step in the line 5 of the BASH script ITSoneDB_update_bf.sh
+    6. cd fasta_file_folder 
+    7. ls *fasta.gz > sample_list
+    8. ./ITSoneDB_update_bf.sh
+
