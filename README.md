@@ -1,7 +1,7 @@
 # ITSoneDB population pipeline
 
 ___
-**ITSoneDB** is a database colleciting Eukayotic ITS1 sequencens and consistent taxonomic annotation.  
+**ITSoneDB** is a database colleciting Eukayotic ITS1 sequencens and consistent taxonomic annotation. It is avaialble at [http://itsonedb.cloud.ba.infn.it/](http://itsonedb.cloud.ba.infn.it/). 
 ___  
 <div align=justify>The designed pipeline integrates ad-hoc Python and BASH scripts and third-party tools (See the figure below).
 
@@ -11,5 +11,6 @@ ___
    
 3. In parallel, HMM profiles for 18S and 5.8S rRNA genes are mapped on FASTA files by means of hmmsearch (HMMER 3.1) (right diagram part).  The ITS1 boundaries information obtained by both procedures are merged in order to produce the files needed to populate the database.</div>
 
-
-![Alt text](ITSoneDB_Eukaryotes.tiff "Pipeline steps developed to generate ITSoneDB")
+___
+![Alt text](ITSoneDB_Eukaryotes.tif "Pipeline steps developed to generate ITSoneDB")
+___
