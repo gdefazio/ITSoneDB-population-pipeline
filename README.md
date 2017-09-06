@@ -23,7 +23,7 @@ ___
 ## USAGE
 Following the instruction to execute the scripts:
 + **ENA flat file parsing**:
-    1. flat file parsing:
+    1. flat file parsing (the script should be applied in a folder containing the gzipped ENA flat files):
         - python ENA_parser.py
     2. prepare FASTA folder
         - gzip *fasta
