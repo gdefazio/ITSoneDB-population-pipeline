@@ -13,7 +13,7 @@ ___
 3. In parallel, HMM profiles for 18S and 5.8S rRNA genes are mapped on FASTA files by means of hmmsearch (HMMER 3.1) (right diagram part).  The ITS1 boundaries information obtained by both procedures are merged in order to produce the files needed to populate the database.</div>
 
 ___
-![Alt text](ITSoneDB_Eukaryotes.tif "Pipeline steps developed to generate ITSoneDB")
+![Alt text](ITSoneDB_Eukaryotes.tiff "Pipeline steps developed to generate ITSoneDB")
 ___
 
 ## REQUIREMENTS
