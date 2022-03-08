@@ -25,9 +25,16 @@ Following the instruction to execute the scripts:
 ```
 $./ITSoneDB_upgrade_pipeline.sh
         -s full path directory containing managed scripts
-        -x full path auxiliary files
-        -r full path releases directory
+        -x full path auxiliary files directory
+        -r full path previous releases directory
         -c cpus number
+        
+$./ETL_population_pipeline.sh
+        -s full path directory containing managed scripts
+        -n release number
+        -p previous release number
+        -r full path releases directory
+        
 ```
        
  
