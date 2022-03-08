@@ -22,25 +22,12 @@ ___
 
 ## USAGE
 Following the instruction to execute the scripts:
-+ **ENA flat file parsing**:
-    1. flat file parsing (the script should be applied in a folder containing the gzipped ENA flat files):
-        - python ENA_parser.py
-    2. prepare FASTA folder
-        - gzip *fasta
-        - mkdir fasta_file_folder
-        - mv *fasta.gz fasta_file_folder
-    3. Prepare TSV folder:
-        - mkdir tsv_folder
-        - mv *tsv tsv_folder
-+ **Extraction of ITS1 annotated in ENA entries**:  
-        python extract_ITS1_loc.py tsv_folder
-+ **HMM based ITS1 boundaries inference**:  
-    1. mkdir script
-    2. mv estrazione_localizzazione_from_hmm.py script 
-    3. mv hmmer_txt_parser.py script
-    4. cd script && pwd && cd ..
-    5. substitute the result of the previous step in the line 5 of the BASH script ITSoneDB_update_bf.sh
-    6. cd fasta_file_folder 
-    7. ls *fasta.gz > sample_list
-    8. ./ITSoneDB_update_bf.sh  
+USAGE:
+$./ITSoneDB_upgrade_pipeline.sh
+        -s full path directory containing scripts executed here
+        -x full path aux directory
+        -r full path releases directory
+        -c cpus number
+        
+       
  
