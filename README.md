@@ -22,12 +22,12 @@ ___
 
 ## USAGE
 Following the instruction to execute the scripts:
-'''
+`
 $./ITSoneDB_upgrade_pipeline.sh
         -s full path directory containing scripts executed here
         -x full path aux directory
         -r full path releases directory
         -c cpus number
-'''     
+`
        
  
