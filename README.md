@@ -37,5 +37,5 @@ $./ETL_population_pipeline.sh
         -r full path releases directory
         
 ```
-       
+Auxiliary files are 16S and 5.8S HMM models and txt file containing ITS1 synonyms dictionary.
  
