@@ -20,6 +20,7 @@ ___
 ## REQUIREMENTS
 1. The **HMMER** is required (for conda installation info see [https://anaconda.org/bioconda/hmmer](https://anaconda.org/bioconda/hmmer)).
 2. The Species Representative Entry Identification procedure require **VSEARCH** (for installation info see [https://github.com/torognes/vsearch](https://github.com/torognes/vsearch)).
+3. Python3 dependencies are **argparse**, **argcomplete**, **getopt**, **multiprocessing**, **numpy**, **biopython**, **datetime**.
 
 ## USAGE
 Following the instruction to execute the scripts:
