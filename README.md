@@ -18,7 +18,7 @@ ___
 ___
 
 ## REQUIREMENTS
-1. The **Biopython** module is required (for installation info see [http://biopython.org](http://biopython.org)).
+1. The **HMMER** is required (for conda installation info see [https://anaconda.org/bioconda/hmmer](https://anaconda.org/bioconda/hmmer)).
 2. The Species Representative Entry Identification procedure require **VSEARCH** (for installation info see [https://github.com/torognes/vsearch](https://github.com/torognes/vsearch)).
 
 ## USAGE
