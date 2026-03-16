@@ -1,0 +1,12 @@
+The marine section script could not be automated because of
+continuously worm api site breakdown. The procedure must be supervised by
+operator resposable of upgrade operations.
+
+Scripts managing marine section written for launching.
+python taxonID2AphiaID.py
+                -t ITSoneDB_entries_generator_definitive_corrected.tsv
+                -n ncbi_taxonomy_data
+                -o marine_species
+                -a marine_species/taxid2aphiaID.tsv
+
+python prepare_data_for_marine_section.py

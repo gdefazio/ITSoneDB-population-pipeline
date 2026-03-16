@@ -1,46 +1,51 @@
-# ITSoneDB population pipeline
+# ITSoneDB_devel
 
-___
-**ITSoneDB** is a database collecting Eukayotic ITS1 sequences and consistent taxonomic annotations. It is available at [http://itsonedb.cloud.ba.infn.it/](http://itsonedb.cloud.ba.infn.it/). 
-___
-## RATIONALE  
-<div align=justify>The pipeline designed for ITSoneDB population integrates <em>ad-hoc</em> Python and BASH scripts and third-party tools (See the figure below).
+This is the ITSoneDB population pipeline used from 1.138 database version.
 
-1. In the initial step the ENA entries are locally downloaded and eukaryotic entries are extracted.  
+## File System Description
 
-2. From each entry specific information (i.e. accession number, version, description line and annotation under specific keys) are pulled out and stored in a TSV file and consistent sequence data are annotated in FASTA files. TSV and FASTA files are analyzed by two parallel procedures to extract or to infer the ITS1 location. The TSV files are parsed out to extract the annotation relative to ITS1 boundaries by means of a commonly used ITS1 synonyms dictionary.
-   
-3. In parallel, HMM profiles for 18S and 5.8S rRNA genes are mapped on FASTA files by means of hmmsearch (HMMER 3.1) (right diagram part).  The ITS1 boundaries information obtained by both procedures are merged in order to produce the files needed to populate the database.</div>
+ITSoneDB_devel repository contains several forlders:
 
-___
-![Alt text](ITSoneDB_Eukaryotes.tiff "Pipeline steps developed to generate ITSoneDB")
-___
+- **_ITSoneDB_upgrade_pipeline_**: it contains the python scripts that are menaged by 
+**ITSoneDB_upgrade_pipeline.sh**
 
-## REQUIREMENTS
-1. The **Biopython** module is required (for installation info see [http://biopython.org](http://biopython.org)).
-2. The Species Representative Entry Identification procedure require **VSEARCH** (for installation info see [https://github.com/torognes/vsearch](https://github.com/torognes/vsearch)).
+- **_ITSoneDB_etl_popul_pipeline_** : it contains the python scripts that are menaged by 
+**ETL_population_pipeline.sh**
 
-## USAGE
-Following the instruction to execute the scripts:
-+ **ENA flat file parsing**:
-    1. flat file parsing (the script should be applied in a folder containing the gzipped ENA flat files):
-        - python ENA_parser.py
-    2. prepare FASTA folder
-        - gzip *fasta
-        - mkdir fasta_file_folder
-        - mv *fasta.gz fasta_file_folder
-    3. Prepare TSV folder:
-        - mkdir tsv_folder
-        - mv *tsv tsv_folder
-+ **Extraction of ITS1 annotated in ENA entries**:  
-        python extract_ITS1_loc.py tsv_folder
-+ **HMM based ITS1 boundaries inference**:  
-    1. mkdir script
-    2. mv estrazione_localizzazione_from_hmm.py script 
-    3. mv hmmer_txt_parser.py script
-    4. cd script && pwd && cd ..
-    5. substitute the result of the previous step in the line 5 of the BASH script ITSoneDB_update_bf.sh
-    6. cd fasta_file_folder 
-    7. ls *fasta.gz > sample_list
-    8. ./ITSoneDB_update_bf.sh  
- 
+- _librs_ : it contains libraries used by python scripts
+
+- _additionals_ : additional python scripts not updated
+
+
+## **ITSoneDB_upgrade_pipeline.sh** usage
+
+This script menages the entire procedure to produce ITSoneDB annotations on ENA sequences.
+It verifies whether there is a newer ENA version with respect to the latest in _releases_ directory. 
+If true, the program downloads in local the ENA flat files. Then applyies the procedure to extract ITS1 location from ENA notations and de-novo annotate ITS1 from NHMMER mapping 18S and 5.8 HMM profiles.
+Then, a final table is produced and represents the starting point of **ETL_population_pipeline.sh** script.
+
+#### USAGE:
+```
+$./ITSoneDB_upgrade_pipeline.sh
+        -s full path to ITSoneDB_upgrade_pipeline directory
+        -x full path to aux directory (containing auxiliary files such as 18S and 5.8S HMM profiles and 
+           ITS1 annotation synonyms)
+        -r full path to releases directory (containing previous releases of ITSoneDB)
+        -c cpus number
+```
+
+## **ETL_population_pipeline.sh** usage
+
+This script menages the procedure to populate ETL directory after
+ITSoneDB_upgrade_pipeline procedure completion. The ETL directory contains tables and files
+which have to be charged on [ITSoneDB web site](http://itsonedb.cloud.ba.infn.it/)
+
+#### USAGE:
+
+```
+$./ETL_population_pipeline.sh
+        -s full path to ITSoneDB_etl_popul_pipeline directory
+        -n new release number
+        -p previous release number
+        -r full path to releases directory (containing all ITSoneDB releases)
+```

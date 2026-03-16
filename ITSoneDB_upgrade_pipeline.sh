@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 help="
 
@@ -6,6 +6,7 @@ This script menages the procedure to extract ITS1 location from ENA notations
 and from NHMMER 18S and 5.8 mapping procedure.
 USAGE:
 $./ITSoneDB_upgrade_pipeline.sh
+        -n ITSoneDB release number
         -s full path directory containing scripts executed here
         -x full path aux directory
         -r full path releases directory
@@ -17,9 +18,11 @@ if [[ $# -eq 0 ]]   			# se lo script è eseguito senza argomenti...
   		echo -e "$help"		# ... stampo l'help...
   		exit 1         		# ... ed esco.
 fi
-while getopts ":h:s:x:r:c:" opzione
+
+while getopts ":h:n:s:x:r:c:" opzione
 do
 	case "${opzione}" in
+	n) release=${OPTARG};;
 	s) scripts=${OPTARG};;
 	x) aux=${OPTARG};;
 	r) releases=${OPTARG};;
@@ -48,52 +51,71 @@ echo "                     #####################################################
 echo ""
 echo ""
 echo ""
-wget -O ./release_doc  ftp://ftp.ebi.ac.uk/pub/databases/ena/sequence/release/doc/Release_* -q
-exit_verify
-release=$(${scripts}/0_verify_new_ena_release.py -d ./release_doc -r ${releases})
-exit_verify
+#wget -O ./release_doc  ftp://ftp.ebi.ac.uk/pub/databases/ena/sequence/release/doc/Release_* -q
+#exit_verify
+#release=$(${scripts}/0_verify_new_ena_release.py -d ./release_doc -r ${releases})
+#exit_verify
 # echo ${release}
-rm ./release_doc
-echo "This program try to find the new release of ENA"
-
-if [[ ${release} == "false" ]]
-then
-echo "You are not lucky today! There is not a new release of ENA.
-    You can try later for the upgrade!
-    See you later.
-    Bye."
-exit 0
-else
+#rm ./release_doc
+#echo "This program try to find the new release of ENA"
+#
+#if [[ ${release} == "false" ]]
+#then
+#echo "You are not lucky today! There is not a new release of ENA.
+#    You can try later for the upgrade!
+#    See you later.
+#    Bye."
+#exit 0
+#else
 releases=$(realpath -s ${releases})
 scripts=$(realpath -s ${scripts})
 aux=$(realpath -s ${aux})
 
-echo ""
-echo "New release found: ${release}"
-echo "START THE UPGRADE OF ITSoneDB BASED ON ENA RELEASE ${release}"
+#echo ""
+#echo "New release found: ${release}"
+echo "START THE UPGRADE OF ITSoneDB BASED ON ENA"
+echo "ENA RELEASE SYSTEM HAS BEEN DEPRECATED AND SUBSTITUTED BY A MORE FREQUENT"
+echo "SNAPSHOT SYSTEM. ITSoneDB RELEASE COUNTER WILL CONTINUE ADDING 1 FROM 143"
+echo "THAT IS THE LAST ENA RELEASE"
+echo "=========================================================================="
+echo "ITSoneDB release ${release}"
 
-echo ""
-echo ""
-echo "############################################################################################"
-echo "${scripts}/1_download_ena_sequences.sh
-                               -r ${release}
-                               -d ${releases}/${release}/dat_${release}"
-${scripts}/1_download_ena_sequences.sh\
-                            -r ${release}\
-                            -d ${releases}/${release}/dat_${release}
-exit_verify
-echo ""
-echo ""
-echo "############################################################################################"
-echo "${scripts}/2_ENA_parser.py
-                            -r ${release}
-                            -i ${releases}/${release}/dat_${release}
-                            -p ${cpus}"
-${scripts}/2_ENA_parser.py\
-                    -r ${release}\
-                    -i ${releases}/${release}/dat_${release}\
-                    -p ${cpus}
-exit_verify
+
+main_command="$./ITSoneDB_upgrade_pipeline.sh
+        -n ${release}
+        -s ${scripts}
+        -x ${aux}
+        -r ${releases}
+        -c ${cpus}
+"
+#
+#echo ${main_command}
+#
+#echo ""
+#echo ""
+#echo "############################################################################################"
+#echo "${scripts}/1_download_ena_sequences.sh
+#                               -r ${release}
+#                               -d ${releases}/${release}/dat_${release}"
+#${scripts}/1_download_ena_sequences.sh\
+#                            -r ${release}\
+#                            -d ${releases}/${release}/dat_${release}
+#exit_verify
+#echo ""
+#echo ""
+#echo "############################################################################################"
+#echo "${scripts}/2_ENA_parser.py
+#                            -r ${release}
+#                            -i /home3/gdefazio/ITSoneDB/ena_repo
+#                            -p ${cpus}
+#                            -o ${releases}/${release}"
+#${scripts}/2_ENA_parser.py \
+#                    -r ${release}\
+#                    -i /home3/gdefazio/ITSoneDB/ena_repo \
+#                    -p ${cpus} \
+#                    -o ${releases}/${release}
+#
+#exit_verify
 echo ""
 echo ""
 echo "############################################################################################"
@@ -158,4 +180,4 @@ ${scripts}/7_ITSoneDB_ITS1_summary.py -r ${release}\
                                       -o ${releases}/${release}/ITS1_loc_final_table.csv
 exit_verify
 
-fi
+#fi

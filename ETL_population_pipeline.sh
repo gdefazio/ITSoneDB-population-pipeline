@@ -56,8 +56,8 @@ echo "                     #####################################################
 echo ""
 echo ""
 echo ""
-scripts=`realpath -s {scripts}`
-releases=`realpath -s {releases}`
+scripts=`realpath -s ${scripts}`
+releases=`realpath -s ${releases}`
 echo $scripts
 #x) aux=${OPTARG};;
 echo $release
@@ -71,12 +71,12 @@ echo "${scripts}/0_splitter.py
                 -f ${releases}/${release}/fasta_${release}/
                 -i ${releases}/${release}/ITS1_loc_final_table.csv
                 -o ${releases}/${release}/etl"
-${scripts}/0_splitter.py\
-                -t ${releases}/${release}/tsv_${release}/\
-                -f ${releases}/${release}/fasta_${release}/\
-                -i ${releases}/${release}/ITS1_loc_final_table.csv\
-                -o ${releases}/${release}/etl
-exit_verify
+#${scripts}/0_splitter.py\
+#                -t ${releases}/${release}/tsv_${release}/\
+#                -f ${releases}/${release}/fasta_${release}/\
+#                -i ${releases}/${release}/ITS1_loc_final_table.csv\
+#                -o ${releases}/${release}/etl
+#exit_verify
 
 echo ""
 echo ""
